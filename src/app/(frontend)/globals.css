@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+
+body {
+  font-family: var(--font-yekan), ui-sans-serif, system-ui, sans-serif;
+}
+::placeholder {
+    font-size: 11px;
+}
