@@ -6,6 +6,10 @@ import admin from '../access/admin'
 
 export const Users: CollectionConfig = {
   slug: 'users',
+  labels: {
+    plural: 'کاربران',
+    singular: 'کاربر',
+  },
   admin: {
     useAsTitle: 'email',
   },

@@ -5,6 +5,10 @@ import admin from '../access/admin'
 
 export const Managers: CollectionConfig = {
   slug: 'managers',
+  labels: {
+    plural: 'مدیران',
+    singular: 'مدیر',
+  },
   admin: {
     useAsTitle: 'username',
   },
@@ -30,21 +34,27 @@ export const Managers: CollectionConfig = {
   fields: [
     {
       name: 'username',
+      label: 'نام کاربری',
       type: 'text',
       required: true,
       unique: true, // مهم: باید unique باشه
       index: true, // برای سرعت بیشتر
     },
+    {
+      name: 'status',
+      type: 'checkbox',
+      label: 'فعال',
+    },
   ],
   hooks: {
     beforeChange: [
-      //   async ({ data, operation }) => {
-      //     // ساخت fake email برای سازگاری با Payload
-      //     if (data?.username) {
-      //       data.email = `${data.username}@managers.local`
-      //     }
-      //     return data
-      //   },
+      async ({ data, operation }) => {
+        // ساخت fake email برای سازگاری با Payload
+        if (data?.username) {
+          data.email = `${data.username}@managers.local`
+        }
+        return data
+      },
     ],
   },
 }

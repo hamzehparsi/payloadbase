@@ -31,7 +31,7 @@ export function UserProfile() {
   }
 
   return (
-    <div className="flex items-center gap-4 p-4 bg-gray-100 rounded-lg">
+    <div className="flex justify-between items-center gap-4 p-4 bg-gray-100 rounded-lg">
       <div className="flex flex-col">
         <span className="text-sm text-gray-600">خوش آمدید</span>
         <span className="font-bold text-lg">{user.username}</span>

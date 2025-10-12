@@ -6,11 +6,13 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { fa } from '@payloadcms/translations/languages/fa'
+import { en } from '@payloadcms/translations/languages/en'
 
 import { Users } from './collections/Users/config'
 import { Media } from './collections/Media'
-import { Customers } from './collections/Customers/config'
 import { Managers } from './collections/Managers/config'
+import { Pages } from './collections/pages/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,8 +24,31 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Customers, Managers],
+  collections: [Users, Media, Managers, Pages],
   editor: lexicalEditor(),
+
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+        rtl: false,
+      },
+      {
+        label: 'Farsi',
+        code: 'fa',
+        // opt-in to setting default text-alignment on Input fields to rtl (right-to-left)
+        // when current locale is rtl
+        rtl: true,
+      },
+    ],
+    defaultLocale: 'en', // required
+    fallback: true, // defaults to true
+  },
+  i18n: {
+    supportedLanguages: { en, fa },
+  },
+
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

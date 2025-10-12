@@ -7,11 +7,6 @@
  */
 
 /**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tierProps".
- */
-export type TierProps = ('Free' | 'Basic' | 'Pro' | 'Enterprise') | null;
-/**
  * Supported timezones in IANA format.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -69,15 +64,14 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
-    customers: CustomerAuthOperations;
     managers: ManagerAuthOperations;
   };
   blocks: {};
   collections: {
     users: User;
     media: Media;
-    customers: Customer;
     managers: Manager;
+    pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -86,8 +80,8 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    customers: CustomersSelect<false> | CustomersSelect<true>;
     managers: ManagersSelect<false> | ManagersSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -97,13 +91,10 @@ export interface Config {
   };
   globals: {};
   globalsSelect: {};
-  locale: null;
+  locale: 'en' | 'fa';
   user:
     | (User & {
         collection: 'users';
-      })
-    | (Customer & {
-        collection: 'customers';
       })
     | (Manager & {
         collection: 'managers';
@@ -114,24 +105,6 @@ export interface Config {
   };
 }
 export interface UserAuthOperations {
-  forgotPassword: {
-    email: string;
-    password: string;
-  };
-  login: {
-    email: string;
-    password: string;
-  };
-  registerFirstUser: {
-    email: string;
-    password: string;
-  };
-  unlock: {
-    email: string;
-    password: string;
-  };
-}
-export interface CustomerAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -211,39 +184,11 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "customers".
- */
-export interface Customer {
-  id: string;
-  firstName?: string | null;
-  lastName?: string | null;
-  tier?: TierProps;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  _verified?: boolean | null;
-  _verificationToken?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "managers".
  */
 export interface Manager {
   id: string;
+  status?: boolean | null;
   updatedAt: string;
   createdAt: string;
   email?: string | null;
@@ -265,6 +210,46 @@ export interface Manager {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: string;
+  title: string;
+  /**
+   * آدرس صفحه - مثال: about-us
+   */
+  slug: string;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * خلاصه‌ای کوتاه از محتوای صفحه
+   */
+  excerpt?: string | null;
+  image?: (string | null) | Media;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    metaImage?: (string | null) | Media;
+  };
+  status?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -279,22 +264,18 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
-        relationTo: 'customers';
-        value: string | Customer;
-      } | null)
-    | ({
         relationTo: 'managers';
         value: string | Manager;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: string | Page;
       } | null);
   globalSlug?: string | null;
   user:
     | {
         relationTo: 'users';
         value: string | User;
-      }
-    | {
-        relationTo: 'customers';
-        value: string | Customer;
       }
     | {
         relationTo: 'managers';
@@ -313,10 +294,6 @@ export interface PayloadPreference {
     | {
         relationTo: 'users';
         value: string | User;
-      }
-    | {
-        relationTo: 'customers';
-        value: string | Customer;
       }
     | {
         relationTo: 'managers';
@@ -389,36 +366,10 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "customers_select".
- */
-export interface CustomersSelect<T extends boolean = true> {
-  firstName?: T;
-  lastName?: T;
-  tier?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  _verified?: T;
-  _verificationToken?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
-    | T
-    | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "managers_select".
  */
 export interface ManagersSelect<T extends boolean = true> {
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -436,6 +387,27 @@ export interface ManagersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  body?: T;
+  excerpt?: T;
+  image?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        metaImage?: T;
+      };
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -10,12 +10,7 @@ const Template: React.FC<{ children: ReactNode }> = async ({ children }) => {
     redirect('/account/login')
   }
   // if there is, we can show the page content
-  return (
-    <>
-      <div className={`bg-emerald-500 p-4 flex justify-between`}>{/* <LogoutButton /> */}</div>
-      {children}
-    </>
-  )
+  return <>{children}</>
 }
 
 export default Template
