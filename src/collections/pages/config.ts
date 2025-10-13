@@ -9,7 +9,6 @@ export const Pages: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'status', 'updatedAt'],
   },
   access: {
     read: () => true,
@@ -27,82 +26,40 @@ export const Pages: CollectionConfig = {
       label: 'نامک (URL)',
       required: true,
       unique: true,
+      index: true, // اضافه کردن index
       admin: {
         description: 'آدرس صفحه - مثال: about-us',
       },
-      // اتوماتیک از روی title ساخته شود
-      hooks: {
-        beforeValidate: [
-          ({ value, data }) => {
-            if (!value && data?.title) {
-              return data.title
-                .toLowerCase()
-                .replace(/[^a-z0-9\u0600-\u06FF]+/g, '-')
-                .replace(/^-+|-+$/g, '')
-            }
-            return value
-          },
-        ],
-      },
     },
-    {
-      name: 'body',
-      type: 'richText',
-      label: 'محتوای صفحه',
-      required: true,
-    },
+    // {
+    //   name: 'body',
+    //   type: 'richText',
+    //   label: 'محتوای صفحه',
+    //   required: true,
+    // },
     {
       name: 'excerpt',
       type: 'textarea',
       label: 'خلاصه',
       admin: {
-        description: 'خلاصه‌ای کوتاه از محتوای صفحه',
+        rows: 4,
+        rtl: true,
       },
     },
     {
       name: 'image',
       type: 'upload',
-      label: 'تصویر شاخص',
+      label: 'تصویر نماد',
       relationTo: 'media',
       filterOptions: {
         mimeType: { contains: 'image' },
       },
     },
     {
-      name: 'seo',
-      type: 'group',
-      label: 'تنظیمات SEO',
-      fields: [
-        {
-          name: 'metaTitle',
-          type: 'text',
-          label: 'عنوان متا',
-        },
-        {
-          name: 'metaDescription',
-          type: 'textarea',
-          label: 'توضیحات متا',
-          maxLength: 160,
-        },
-        {
-          name: 'metaImage',
-          type: 'upload',
-          label: 'تصویر متا',
-          relationTo: 'media',
-          filterOptions: {
-            mimeType: { contains: 'image' },
-          },
-        },
-      ],
-    },
-    {
       name: 'status',
       type: 'checkbox',
       label: 'منتشر شده',
       defaultValue: true,
-      admin: {
-        position: 'sidebar',
-      },
     },
   ],
 }

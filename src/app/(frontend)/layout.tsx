@@ -44,7 +44,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <UserProvider initialUser={user}>
           <div className="mx-auto max-w-7xl pt-10">
             {/* <div className="flex w-full gap-5 justify-between"> */}
-            <div className="w-52 border-l border-slate-100 h-[40rem] fixed">
+            <div className="w-52 border-l border-slate-200 h-[51rem] fixed">
               <div className="flex flex-col justify-between h-full">
                 <Link href={'/'}>
                   <div className="flex items-end gap-2">

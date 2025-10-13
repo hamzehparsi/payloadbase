@@ -219,31 +219,8 @@ export interface Page {
    * آدرس صفحه - مثال: about-us
    */
   slug: string;
-  body: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  /**
-   * خلاصه‌ای کوتاه از محتوای صفحه
-   */
   excerpt?: string | null;
   image?: (string | null) | Media;
-  seo?: {
-    metaTitle?: string | null;
-    metaDescription?: string | null;
-    metaImage?: (string | null) | Media;
-  };
   status?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -395,16 +372,8 @@ export interface ManagersSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  body?: T;
   excerpt?: T;
   image?: T;
-  seo?:
-    | T
-    | {
-        metaTitle?: T;
-        metaDescription?: T;
-        metaImage?: T;
-      };
   status?: T;
   updatedAt?: T;
   createdAt?: T;

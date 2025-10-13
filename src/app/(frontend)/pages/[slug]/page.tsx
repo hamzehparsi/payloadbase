@@ -1,7 +1,9 @@
 // app/pages/[slug]/page.tsx
-import { notFound } from 'next/navigation'
+// import { EmptyDemo } from '@/app/(frontend)/not-found'
 
-// // تایپ‌های TypeScript
+import { notFound } from 'next/navigation' // ✅ درست
+
+// تایپ‌های TypeScript
 interface Page {
   id: string
   title: string
@@ -28,13 +30,38 @@ interface PageResponse {
   docs: Page[]
 }
 
-// کامپوننت اصلی صفحه
-export default async function Page({ params }: { params: { slug: string } }) {
+// تولید metadata برای SEO
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/pages?where[slug][equals]=${slug}&where[status][equals]=true`,
     {
-      next: { revalidate: 60 }, // ISR
+      next: { revalidate: 60 },
+    },
+  )
+
+  if (!res.ok) return {}
+
+  const data: PageResponse = await res.json()
+  const page = data.docs[0]
+
+  if (!page) return {}
+
+  return {
+    title: page.seo?.metaTitle || page.title,
+    description: page.seo?.metaDescription || page.excerpt,
+  }
+}
+
+// کامپوننت اصلی صفحه
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/pages?where[slug][equals]=${slug}&where[status][equals]=true`,
+    {
+      next: { revalidate: 60 },
     },
   )
 
@@ -67,8 +94,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
       {/* خلاصه */}
       {page.excerpt && <p className="text-xl text-gray-600 mb-8">{page.excerpt}</p>}
-
-      {/* محتوا */}
 
       {/* اطلاعات اضافی */}
       <div className="mt-12 pt-8 border-t text-sm text-gray-500">
