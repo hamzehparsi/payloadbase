@@ -13,6 +13,8 @@ import { Users } from './collections/Users/config'
 import { Media } from './collections/Media'
 import { Managers } from './collections/Managers/config'
 import { Pages } from './collections/pages/config'
+import { News } from './collections/news/config'
+import { Tags } from './collections/tags/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,7 +26,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Managers, Pages],
+  collections: [Users, Media, Managers, Pages, News, Tags],
   editor: lexicalEditor(),
 
   localization: {

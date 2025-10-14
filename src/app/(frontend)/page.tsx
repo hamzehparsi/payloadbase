@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url'
 import config from '@/payload.config'
 import './globals.css'
 import Link from 'next/link'
+import LastNewsItem from '@/components/LastNewsItem'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -14,12 +15,10 @@ export default async function HomePage() {
   const payload = await getPayload({ config: payloadConfig })
   // const { user } = await payload.auth({ headers })
 
-  // const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
-
   return (
     <>
       <div>
-        <Link href={'/docs'}>Docs Links</Link>
+        <LastNewsItem />
       </div>
     </>
   )

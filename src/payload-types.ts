@@ -72,6 +72,8 @@ export interface Config {
     media: Media;
     managers: Manager;
     pages: Page;
+    news: News;
+    tags: Tag;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -82,6 +84,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     managers: ManagersSelect<false> | ManagersSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -227,6 +231,58 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: string;
+  /**
+   * عنوان خبر - نامک به صورت خودکار از این فیلد تولید می‌شود
+   */
+  title: string;
+  /**
+   * آدرس صفحه - به صورت خودکار از عنوان تولید می‌شود
+   */
+  slug: string;
+  publishedAt: string;
+  excerpt?: string | null;
+  /**
+   * هشتگ‌های مرتبط با این خبر
+   */
+  hashtags?: (string | Tag)[] | null;
+  body?: string | null;
+  image?: (string | null) | Media;
+  /**
+   * نوع محتوای این خبر را انتخاب کنید
+   */
+  type: 'news' | 'photo-report' | 'video';
+  status?: boolean | null;
+  /**
+   * تصاویر گزارش تصویری را انتخاب کنید (می‌توانید چندین عکس انتخاب کنید)
+   */
+  gallery?: (string | Media)[] | null;
+  /**
+   * یا می‌توانید فایل ویدیو را مستقیماً آپلود کنید
+   */
+  videoFile?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: string;
+  /**
+   * نام هشتگ (مثال: سیاسی، اقتصادی، ورزشی)
+   */
+  name: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -247,6 +303,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: string | Page;
+      } | null)
+    | ({
+        relationTo: 'news';
+        value: string | News;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: string | Tag;
       } | null);
   globalSlug?: string | null;
   user:
@@ -375,6 +439,35 @@ export interface PagesSelect<T extends boolean = true> {
   excerpt?: T;
   image?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  publishedAt?: T;
+  excerpt?: T;
+  hashtags?: T;
+  body?: T;
+  image?: T;
+  type?: T;
+  status?: T;
+  gallery?: T;
+  videoFile?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }

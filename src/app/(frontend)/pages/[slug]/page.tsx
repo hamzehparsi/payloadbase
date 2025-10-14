@@ -77,23 +77,27 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   }
 
   return (
-    <div className="container mx-auto px-4 py-8" dir="rtl">
+    <div className="container mx-auto">
       {/* تصویر شاخص */}
       {page.image?.url && (
-        <div className="mb-8">
+        <div className="mb-4">
           <img
             src={page.image.url}
             alt={page.image.alt || page.title}
-            className="w-full h-96 object-cover rounded-lg"
+            className="w-full h-[30rem] object-cover rounded-lg"
           />
         </div>
       )}
 
       {/* عنوان */}
-      <h1 className="text-4xl font-bold mb-4">{page.title}</h1>
+      <h1 className="text-2xl font-black mb-2">{page.title}</h1>
 
       {/* خلاصه */}
-      {page.excerpt && <p className="text-xl text-gray-600 mb-8">{page.excerpt}</p>}
+      {page.excerpt && (
+        <p className="text-sm font-light leading-6 !text-justify text-gray-400 mb-8">
+          {page.excerpt}
+        </p>
+      )}
 
       {/* اطلاعات اضافی */}
       <div className="mt-12 pt-8 border-t text-sm text-gray-500">

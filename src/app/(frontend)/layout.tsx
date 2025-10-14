@@ -69,9 +69,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                 <FooterMenuFixed />
               </div>
             </div>
-            <div className="flex mr-72 gap-4">
-              <div className="w-3/4">{children}</div>
-              <div className="w-1/4">چپ</div>
+            <div className="flex mr-56 gap-4">
+              <div className="w-4/5">{children}</div>
+              <div className="w-1/5">چپ</div>
             </div>
             {/* </div> */}
           </div>
