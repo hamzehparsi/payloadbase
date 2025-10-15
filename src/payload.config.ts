@@ -15,6 +15,7 @@ import { Managers } from './collections/Managers/config'
 import { Pages } from './collections/pages/config'
 import { News } from './collections/news/config'
 import { Tags } from './collections/tags/config'
+import { WeeklyHadith } from './globals/WeeklyHadith'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -28,7 +29,7 @@ export default buildConfig({
   },
   collections: [Users, Media, Managers, Pages, News, Tags],
   editor: lexicalEditor(),
-
+  globals: [WeeklyHadith],
   localization: {
     locales: [
       {

@@ -7,6 +7,9 @@
   --color-brand: #0210de;
   --color-brand-light: #f5f7fb;
   --color-brand-gray: #808080;
+  --color-brand-dark: #e1e9f4;
+  --color-blue-dark: #15295b;
+  
 }
 body {
   font-family: var(--font-yekan), ui-sans-serif, system-ui, sans-serif;

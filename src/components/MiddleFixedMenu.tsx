@@ -5,7 +5,6 @@ import Link from 'next/link'
 
 export default function MiddleFixedMenu() {
   const pathname = usePathname() // ✅ این باید string برگرداند
-  console.log(pathname)
   const isHome = pathname === '/' || pathname === '/frontend/'
   const isAbout = pathname === '/pages/about-us'
 

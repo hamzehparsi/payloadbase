@@ -93,8 +93,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'weekly-hadith': WeeklyHadith;
+  };
+  globalsSelect: {
+    'weekly-hadith': WeeklyHadithSelect<false> | WeeklyHadithSelect<true>;
+  };
   locale: 'en' | 'fa';
   user:
     | (User & {
@@ -502,6 +506,29 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "weekly-hadith".
+ */
+export interface WeeklyHadith {
+  id: string;
+  /**
+   * متن حدیث را وارد کنید
+   */
+  text: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "weekly-hadith_select".
+ */
+export interface WeeklyHadithSelect<T extends boolean = true> {
+  text?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

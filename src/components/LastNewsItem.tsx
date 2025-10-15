@@ -2,6 +2,7 @@ import LastNewsItemClient from './LastNewsItemClient'
 
 interface NewsItem {
   title: string
+  slug: string
   excerpt: string
   image: {
     url: string

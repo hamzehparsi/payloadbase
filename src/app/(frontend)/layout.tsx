@@ -11,26 +11,45 @@ import { useRouter } from 'next/navigation'
 import MiddleFixedMenu from '@/components/MiddleFixedMenu'
 import FooterMenuFixed from '@/components/FooterMenuFixed'
 
-const yekanBakh = localFont({
+const dana = localFont({
   src: [
     {
-      path: '../../fonts/woff2/YekanBakhFaNum-Regular.woff2',
+      path: '../../fonts/woff2/Dana-Light.woff2',
+      weight: '100',
+      style: 'normal',
+    },
+    {
+      path: '../../fonts/woff2/Dana-Regular.woff2',
       weight: '400',
       style: 'normal',
     },
-
     {
-      path: '../../fonts/woff2/YekanBakhFaNum-Bold.woff2',
+      path: '../../fonts/woff2/Dana-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../../fonts/woff2/Dana-DemiBold.woff2',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../../fonts/woff2/Dana-Bold.woff2',
       weight: '700',
       style: 'normal',
     },
     {
-      path: '../../fonts/woff2/YekanBakhFaNum-ExtraBlack.woff2',
+      path: '../../fonts/woff2/Dana-ExtraBold.woff2',
+      weight: '800',
+      style: 'normal',
+    },
+    {
+      path: '../../fonts/woff2/Dana-fat.woff2',
       weight: '900',
       style: 'normal',
     },
   ],
-  variable: '--font-yekan',
+  variable: '--font-dana',
   display: 'swap',
 })
 
@@ -39,21 +58,18 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const user = await getUser()
 
   return (
-    <html lang="fa" dir="rtl" className={yekanBakh.variable}>
-      <body>
+    <html lang="fa" dir="rtl" className={dana.variable}>
+      <body className={dana.className}>
         <UserProvider initialUser={user}>
-          <div className="mx-auto max-w-7xl pt-10">
-            {/* <div className="flex w-full gap-5 justify-between"> */}
+          <div className="mx-auto max-w-screen-xl pt-10">
             <div className="w-52 border-l border-slate-200 h-[51rem] fixed">
               <div className="flex flex-col justify-between h-full">
                 <Link href={'/'}>
                   <div className="flex items-end gap-2">
-                    <Image
-                      priority={true}
+                    <img
                       src="/logo.svg"
-                      width={48}
-                      height={48} // ← اضافه کن
                       alt="اداره حراست شرکت پالایش نفت آبادان"
+                      className="!w-12 !h-auto"
                     />
                     <div className="flex flex-col">
                       <h1 className="font-black text-[16px] text-brand">اداره حراست</h1>
@@ -69,11 +85,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                 <FooterMenuFixed />
               </div>
             </div>
-            <div className="flex mr-56 gap-4">
+            <div className="flex mr-[235px] gap-4">
               <div className="w-4/5">{children}</div>
               <div className="w-1/5">چپ</div>
             </div>
-            {/* </div> */}
           </div>
         </UserProvider>
       </body>
