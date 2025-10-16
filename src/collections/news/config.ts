@@ -135,6 +135,10 @@ export const News: CollectionConfig = {
           label: 'ویدیو',
           value: 'video',
         },
+        {
+          label: 'آموزشی',
+          value: 'learning',
+        },
       ],
       admin: {
         description: 'نوع محتوای این خبر را انتخاب کنید',

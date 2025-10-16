@@ -258,7 +258,7 @@ export interface News {
   /**
    * نوع محتوای این خبر را انتخاب کنید
    */
-  type: 'news' | 'photo-report' | 'video';
+  type: 'news' | 'photo-report' | 'video' | 'learning';
   status?: boolean | null;
   /**
    * تصاویر گزارش تصویری را انتخاب کنید (می‌توانید چندین عکس انتخاب کنید)

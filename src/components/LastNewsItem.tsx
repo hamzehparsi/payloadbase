@@ -21,7 +21,7 @@ interface PageResponse {
 
 export default async function LastNewsItem() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/news?where[status][equals]=true&limit=5&sort=-publishedAt`,
+    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/news?where[status][equals]=true&where[type][not_equals]=learning&limit=5&sort=-publishedAt`,
     {
       next: { revalidate: 60 },
     },
