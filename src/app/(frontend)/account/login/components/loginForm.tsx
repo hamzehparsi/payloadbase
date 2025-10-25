@@ -41,7 +41,7 @@ export default function LoginForm(): ReactElement {
     <FormContainer heading={''}>
       <div className="flex flex-col gap-3 mx-auto text-center mb-6">
         <div className="flex flex-col">
-          <div className="font-black -mb-1 text-3xl text-brand !tracking-tighter">اداره حراست</div>
+          <div className="font-black mb-1 text-3xl text-brand !tracking-tighter">ورود</div>
           <div className="font-bold text-slate-400 text-[13.5px]">شرکت پالایش نفت آبادان</div>
         </div>
       </div>

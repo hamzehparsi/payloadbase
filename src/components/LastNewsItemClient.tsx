@@ -188,7 +188,7 @@ export default function LastNewsItemClient({ news }: LastNewsItemClientProps) {
               key={index}
               onClick={() => api?.scrollTo(index)}
               className={`transition-all duration-300 rounded-full ${
-                current === index ? 'w-8 h-3 bg-cyan-500' : 'w-3 h-3 bg-brand-dark hover:bg-brand'
+                current === index ? 'w-8 h-3 bg-brand' : 'w-3 h-3 bg-brand-dark hover:bg-brand'
               }`}
               aria-label={`برو به اسلاید ${index + 1}`}
             />

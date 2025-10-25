@@ -7,9 +7,9 @@ import { UserProvider } from '@/contexts/UserContext'
 import Link from 'next/link'
 import Image from 'next/image'
 import SecureIcon from '@/components/SecureIcon'
-import { useRouter } from 'next/navigation'
 import MiddleFixedMenu from '@/components/MiddleFixedMenu'
 import FooterMenuFixed from '@/components/FooterMenuFixed'
+import Footer from '@/components/Footer'
 
 const dana = localFont({
   src: [
@@ -88,6 +88,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             <div className="flex mr-[235px] gap-4">
               <div className="w-4/5">{children}</div>
               <div className="w-1/5">چپ</div>
+            </div>
+          </div>
+          <div className="mx-auto max-w-screen-xl pt-10">
+            <div className="w-96 fixed"></div>
+            <div className="mr-[235px]">
+              <Footer />
             </div>
           </div>
         </UserProvider>
