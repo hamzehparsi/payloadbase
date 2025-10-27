@@ -16,6 +16,8 @@ import { Pages } from './collections/pages/config'
 import { News } from './collections/news/config'
 import { Tags } from './collections/tags/config'
 import { WeeklyHadith } from './globals/WeeklyHadith'
+import { LinksFooter } from './globals/LinksFooter'
+import { LinksContents } from './globals/LinksContents'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -29,7 +31,7 @@ export default buildConfig({
   },
   collections: [Users, Media, Managers, Pages, News, Tags],
   editor: lexicalEditor(),
-  globals: [WeeklyHadith],
+  globals: [WeeklyHadith, LinksFooter, LinksContents],
   localization: {
     locales: [
       {

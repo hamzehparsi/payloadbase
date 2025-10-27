@@ -1,6 +1,9 @@
+import LinksFooter from '@/components/LinksFooter'
+import LinksContents from './LinksContents'
+
 export default function Footer() {
   return (
-    <div className="flex items-start m-10 justify-between">
+    <div className="flex items-start m-10 gap-10 justify-between">
       <div className="w-3/5">
         <div className="flex items-center gap-3">
           <div className="size-2 bg-brand-dark rounded-full"></div>
@@ -15,16 +18,22 @@ export default function Footer() {
         </p>
       </div>
       <div className="w-1/5">
-        <div className="flex items-center gap-3">
-          <div className="size-2 bg-brand-dark rounded-full"></div>
-          <div className="font-extrabold text-brand">پیونــدها</div>
+        <div>
+          <div className="flex items-center gap-3">
+            <div className="size-2 bg-brand-dark rounded-full"></div>
+            <div className="font-extrabold text-brand">پیونــدها</div>
+          </div>
+          <LinksFooter />
         </div>
       </div>
       <div className="w-1/5">
-        <div className="flex items-center gap-3">
-          <div className="size-2 bg-brand-dark rounded-full"></div>
-          <div className="font-extrabold text-brand">پیونــدها</div>
+        <div>
+          <div className="flex items-center gap-3">
+            <div className="size-2 bg-brand-dark rounded-full"></div>
+            <div className="font-extrabold text-brand">پیونــدها</div>
+          </div>
         </div>
+        <LinksContents />
       </div>
     </div>
   )

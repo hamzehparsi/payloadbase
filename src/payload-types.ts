@@ -95,9 +95,13 @@ export interface Config {
   };
   globals: {
     'weekly-hadith': WeeklyHadith;
+    links: Link;
+    contents: Content;
   };
   globalsSelect: {
     'weekly-hadith': WeeklyHadithSelect<false> | WeeklyHadithSelect<true>;
+    links: LinksSelect<false> | LinksSelect<true>;
+    contents: ContentsSelect<false> | ContentsSelect<true>;
   };
   locale: 'en' | 'fa';
   user:
@@ -522,10 +526,92 @@ export interface WeeklyHadith {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "links".
+ */
+export interface Link {
+  id: string;
+  /**
+   * لیست پیوندهای مفید - می‌توانید ترتیب آنها را با drag & drop تغییر دهید
+   */
+  items?:
+    | {
+        title: string;
+        url: string;
+        openInNewTab?: boolean | null;
+        /**
+         * آیا این پیوند در سایت نمایش داده شود؟
+         */
+        isActive?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contents".
+ */
+export interface Content {
+  id: string;
+  /**
+   * لیست پیوندهای مفید - می‌توانید ترتیب آنها را با drag & drop تغییر دهید
+   */
+  items?:
+    | {
+        title: string;
+        url: string;
+        /**
+         * آیا این پیوند در سایت نمایش داده شود؟
+         */
+        isActive?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "weekly-hadith_select".
  */
 export interface WeeklyHadithSelect<T extends boolean = true> {
   text?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "links_select".
+ */
+export interface LinksSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        title?: T;
+        url?: T;
+        openInNewTab?: T;
+        isActive?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contents_select".
+ */
+export interface ContentsSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        title?: T;
+        url?: T;
+        isActive?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
