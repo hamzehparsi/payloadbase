@@ -74,6 +74,7 @@ export interface Config {
     pages: Page;
     news: News;
     tags: Tag;
+    shahid: Shahid;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -86,6 +87,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
+    shahid: ShahidSelect<false> | ShahidSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -291,6 +293,24 @@ export interface Tag {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "shahid".
+ */
+export interface Shahid {
+  id: string;
+  fullName?: string | null;
+  /**
+   * لطفاً تصویر با کیفیت و مناسب آپلود کنید
+   */
+  image: string | Media;
+  /**
+   * آیا این شهید در سایت نمایش داده شود؟
+   */
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -319,6 +339,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'tags';
         value: string | Tag;
+      } | null)
+    | ({
+        relationTo: 'shahid';
+        value: string | Shahid;
       } | null);
   globalSlug?: string | null;
   user:
@@ -476,6 +500,17 @@ export interface NewsSelect<T extends boolean = true> {
 export interface TagsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "shahid_select".
+ */
+export interface ShahidSelect<T extends boolean = true> {
+  fullName?: T;
+  image?: T;
+  isActive?: T;
   updatedAt?: T;
   createdAt?: T;
 }

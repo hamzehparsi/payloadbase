@@ -11,6 +11,7 @@ export const Managers: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'username',
+    group: 'محتوا',
   },
   auth: {
     tokenExpiration: 7200,

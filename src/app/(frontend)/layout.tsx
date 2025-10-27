@@ -10,6 +10,7 @@ import SecureIcon from '@/components/SecureIcon'
 import MiddleFixedMenu from '@/components/MiddleFixedMenu'
 import FooterMenuFixed from '@/components/FooterMenuFixed'
 import Footer from '@/components/Footer'
+import LastShahidItem from '@/components/LastShahidItem'
 
 const dana = localFont({
   src: [
@@ -87,7 +88,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             </div>
             <div className="flex mr-[235px] gap-4">
               <div className="w-4/5">{children}</div>
-              <div className="w-1/5">چپ</div>
+              <div className="w-1/5">
+                <LastShahidItem />
+                <img src="./doc.svg" alt="" className="mt-10" />
+              </div>
             </div>
           </div>
           <div className="mx-auto max-w-screen-xl pt-10">

@@ -23,6 +23,7 @@ export const News: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'status', 'hashtags', 'type', 'image'],
+    group: 'محتوا',
   },
   access: {
     read: () => true,

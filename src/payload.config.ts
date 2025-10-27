@@ -15,6 +15,7 @@ import { Managers } from './collections/Managers/config'
 import { Pages } from './collections/pages/config'
 import { News } from './collections/news/config'
 import { Tags } from './collections/tags/config'
+import { Shahid } from './collections/shahid/config'
 import { WeeklyHadith } from './globals/WeeklyHadith'
 import { LinksFooter } from './globals/LinksFooter'
 import { LinksContents } from './globals/LinksContents'
@@ -29,7 +30,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Managers, Pages, News, Tags],
+  collections: [Users, Media, Managers, Pages, News, Tags, Shahid],
   editor: lexicalEditor(),
   globals: [WeeklyHadith, LinksFooter, LinksContents],
   localization: {

@@ -9,6 +9,7 @@ export const Tags: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    group: 'محتوا',
   },
   access: {
     read: () => true,
