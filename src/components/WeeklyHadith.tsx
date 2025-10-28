@@ -16,7 +16,7 @@ export default async function WeeklyHadithCard() {
   const hadith: Hadith = await res.json()
 
   return (
-    <div className="pt-1">
+    <div className="pt-1 mb-6">
       <div className="flex items-start gap-3 divide-x divide-slate-200">
         <img className="pl-3 h-6" src="/hadis.svg" alt="حدیث روز" />
         <div className="text-brand-gray text-sm leading-relaxed">{hadith.text}</div>

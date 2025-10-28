@@ -12,7 +12,7 @@ export default async function HomePage() {
   return (
     <>
       <div>
-        <WeeklyHadith />
+        {/* <WeeklyHadith /> */}
         <LastNewsItem />
         <LastLearningItem />
         <LatestLearningFront />

@@ -83,7 +83,7 @@ export default function LastNewsItemClient({ news }: LastNewsItemClientProps) {
         <CarouselContent>
           {news.map((item) => (
             <CarouselItem key={item.id} className="md:basis-full border-none shadow-none">
-              <Card className="overflow-hidden border-none !shadow-none">
+              <Card className="overflow-hidden border-none !shadow-none -mt-6">
                 <Link href={`/news/${item.slug || item.id}`}>
                   <div className="flex items-center gap-0">
                     {/* بخش تصویر - سمت راست */}
