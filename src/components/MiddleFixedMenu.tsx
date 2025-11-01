@@ -53,7 +53,7 @@ export default function MiddleFixedMenu() {
         <Link
           href="/news"
           className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
-            isHome
+            pathname === '/news'
               ? 'bg-brand-light text-brand font-bold'
               : 'text-slate-500 hover:text-brand hover:bg-brand-light'
           }`}
@@ -64,7 +64,7 @@ export default function MiddleFixedMenu() {
         <Link
           href="/learning"
           className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
-            isHome
+            pathname === '/learning'
               ? 'bg-brand-light text-brand font-bold'
               : 'text-slate-500 hover:text-brand hover:bg-brand-light'
           }`}
@@ -75,7 +75,7 @@ export default function MiddleFixedMenu() {
         <Link
           href="/shahid"
           className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
-            isHome
+            pathname === '/shahid'
               ? 'bg-brand-light text-brand font-bold'
               : 'text-slate-500 hover:text-brand hover:bg-brand-light'
           }`}

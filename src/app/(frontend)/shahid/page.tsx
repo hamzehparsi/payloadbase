@@ -78,8 +78,12 @@ export default async function ShahidPage({ searchParams }: ShahidPageProps) {
       {/* Grid لیست شهدا */}
       <div className="">
         {shahidData.docs.map((shahid) => (
-          <Link key={shahid.id} href={`/shahid/${shahid.slug}`} className="flex items-center gap-6">
-            <div className="flex flex-col w-1/4 items-center hover:scale-105 transition-transform duration-300">
+          <Link
+            key={shahid.id}
+            href={`/shahid/${shahid.slug}`}
+            className="flex items-center group gap-6"
+          >
+            <div className="flex flex-col w-1/4 items-center">
               {/* تصویر شهید */}
               <div className="relative w-full h-auto">
                 <div className="p-4">
@@ -100,7 +104,12 @@ export default async function ShahidPage({ searchParams }: ShahidPageProps) {
                 </div>
               </div>
             </div>
-            <div className="w-3/4 text-sm text-brand-gray">{shahid.excerpt}</div>
+            <div className="w-3/4 text-sm text-brand-gray">
+              <div>{shahid.excerpt}</div>
+              <div className="border-gray-200 rounded-full text-xs text-brand group-hover:bg-brand group-hover:text-white transition-all duration-300 ease-in-out border table mt-4 px-4 py-2">
+                ادامه مطلب
+              </div>
+            </div>
           </Link>
         ))}
       </div>

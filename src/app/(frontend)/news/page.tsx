@@ -40,24 +40,28 @@ interface NewsResponse {
 interface NewsPageProps {
   searchParams: Promise<{
     page?: string
+    type?: string
   }>
 }
 
-async function getNewsList(page: number = 1) {
+async function getNewsList(page: number = 1, type?: string) {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/news?where[status][equals]=true&where[type][not_equals]=learning&depth=1&limit=5&page=${page}&sort=-publishedAt`,
-      {
-        next: { revalidate: 60 },
-      },
-    )
+    let url = `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/news?where[status][equals]=true&where[type][not_equals]=learning&depth=1&limit=5&page=${page}&sort=-publishedAt`
+
+    // اگر فیلتر نوع انتخاب شده بود
+    if (type && type !== 'all') {
+      url = `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/news?where[status][equals]=true&where[type][equals]=${type}&depth=1&limit=5&page=${page}&sort=-publishedAt`
+    }
+
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+    })
 
     if (!res.ok) {
       return null
     }
 
     const data: NewsResponse = await res.json()
-
     return data
   } catch (error) {
     console.error('Error fetching news:', error)
@@ -68,7 +72,8 @@ async function getNewsList(page: number = 1) {
 export default async function NewsPage({ searchParams }: NewsPageProps) {
   const params = await searchParams
   const currentPage = Number(params.page) || 1
-  const newsData = await getNewsList(currentPage)
+  const selectedType = params.type || 'all'
+  const newsData = await getNewsList(currentPage, selectedType)
 
   if (!newsData || newsData.docs.length === 0) {
     return (
@@ -78,8 +83,44 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
     )
   }
 
+  const filters = [
+    { label: 'همه', value: 'all', icon: null },
+    { label: 'اخبار و تازه‌ها', value: 'news', icon: IconBellRinging },
+    { label: 'گزارش تصویری', value: 'photo-report', icon: IconPhoto },
+    { label: 'ویدیو', value: 'video', icon: IconBrandYoutube },
+  ]
+
   return (
     <div className="space-y-8">
+      {/* فیلتر */}
+      <div className="bg-white rounded-2xl p-4 border border-gray-100">
+        <div className="flex items-center gap-3 flex-wrap">
+          <span className="text-sm font-semibold text-gray-700">دسته‌بندی:</span>
+          {filters.map((filter) => {
+            const Icon = filter.icon
+            const isActive = selectedType === filter.value
+
+            return (
+              <Link
+                key={filter.value}
+                href={`/news?type=${filter.value}`}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  isActive
+                    ? 'bg-brand text-white shadow-md'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {Icon && <Icon className="w-4 h-4" />}
+                <span>{filter.label}</span>
+              </Link>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* تعداد نتایج */}
+      {/* <div className="text-sm text-gray-600">{newsData.totalDocs} مورد یافت شد</div> */}
+
       {/* لیست اخبار */}
       <div className="-mt-4">
         {newsData.docs.map((news) => (
@@ -96,7 +137,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                  <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-xl">
                     <span className="text-8xl opacity-30">📰</span>
                   </div>
                 )}
@@ -158,16 +199,9 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                 </div>
 
                 {/* عنوان */}
-                <h2 className="text-sm leading-8 group-hover:text-brand text-blue-dark hover:text-brand transition-all duration-300 ease-in-out font-black mb-4">
+                <h2 className="text-sm leading-8 group-hover:text-brand text-blue-dark transition-all duration-300 ease-in-out font-black mb-4">
                   {news.title}
                 </h2>
-
-                {/* چکیده */}
-                {/* {news.excerpt && (
-                  <p className="text-gray-700 text-base md:text-sm leading-relaxed line-clamp-3">
-                    {news.excerpt}
-                  </p>
-                )} */}
               </CardContent>
             </div>
           </Link>
@@ -181,14 +215,17 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
             {/* دکمه قبلی */}
             <PaginationItem>
               <PaginationPrevious
-                href={currentPage > 1 ? `/news?page=${currentPage - 1}` : '#'}
+                href={
+                  currentPage > 1
+                    ? `/news?page=${currentPage - 1}${selectedType !== 'all' ? `&type=${selectedType}` : ''}`
+                    : '#'
+                }
                 className={!newsData.hasPrevPage ? 'pointer-events-none opacity-50' : ''}
               />
             </PaginationItem>
 
             {/* شماره صفحات */}
             {Array.from({ length: newsData.totalPages }, (_, i) => i + 1).map((pageNum) => {
-              // نمایش صفحات نزدیک به صفحه فعلی
               if (
                 pageNum === 1 ||
                 pageNum === newsData.totalPages ||
@@ -197,7 +234,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                 return (
                   <PaginationItem key={pageNum}>
                     <PaginationLink
-                      href={`/news?page=${pageNum}`}
+                      href={`/news?page=${pageNum}${selectedType !== 'all' ? `&type=${selectedType}` : ''}`}
                       isActive={pageNum === currentPage}
                     >
                       {pageNum}
@@ -206,7 +243,6 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                 )
               }
 
-              // نمایش سه نقطه
               if (pageNum === currentPage - 2 || pageNum === currentPage + 2) {
                 return (
                   <PaginationItem key={pageNum}>
@@ -221,7 +257,11 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
             {/* دکمه بعدی */}
             <PaginationItem>
               <PaginationNext
-                href={currentPage < newsData.totalPages ? `/news?page=${currentPage + 1}` : '#'}
+                href={
+                  currentPage < newsData.totalPages
+                    ? `/news?page=${currentPage + 1}${selectedType !== 'all' ? `&type=${selectedType}` : ''}`
+                    : '#'
+                }
                 className={!newsData.hasNextPage ? 'pointer-events-none opacity-50' : ''}
               />
             </PaginationItem>

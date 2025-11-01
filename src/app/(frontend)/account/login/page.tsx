@@ -18,7 +18,7 @@ export default async function LoginPage({
     redirect('/dashboard')
   }
   return (
-    <div className="h-[100vh] w-full mx-auto sm:max-w-sm">
+    <div className="w-full mx-auto sm:max-w-sm">
       {message && (
         <div className="flex justify-center mt-8">
           <p className="emerald-950 border-emerald-950 rounded-md">{message}</p>
