@@ -2,6 +2,7 @@
 import { usePathname } from 'next/navigation' // ✅ فقط usePathname
 import SecureIcon from './SecureIcon'
 import Link from 'next/link'
+import { IconBell, IconBrandYoutube, IconFlag } from '@tabler/icons-react'
 
 export default function MiddleFixedMenu() {
   const pathname = usePathname() // ✅ این باید string برگرداند
@@ -48,6 +49,39 @@ export default function MiddleFixedMenu() {
             <path d="M16 12h.01" />
           </svg>
           <div className="text-xs">دربــاره ما</div>
+        </Link>
+        <Link
+          href="/news"
+          className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
+            isHome
+              ? 'bg-brand-light text-brand font-bold'
+              : 'text-slate-500 hover:text-brand hover:bg-brand-light'
+          }`}
+        >
+          <IconBell />
+          <div className="text-xs">اخبــار و تــازه ها</div>
+        </Link>
+        <Link
+          href="/learning"
+          className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
+            isHome
+              ? 'bg-brand-light text-brand font-bold'
+              : 'text-slate-500 hover:text-brand hover:bg-brand-light'
+          }`}
+        >
+          <IconBrandYoutube />
+          <div className="text-xs">مطالب آموزشی</div>
+        </Link>
+        <Link
+          href="/shahid"
+          className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
+            isHome
+              ? 'bg-brand-light text-brand font-bold'
+              : 'text-slate-500 hover:text-brand hover:bg-brand-light'
+          }`}
+        >
+          <IconFlag />
+          <div className="text-xs">معـرفی شهیـدان</div>
         </Link>
       </div>
     </div>

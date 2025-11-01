@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import { IconBellRinging, IconBrandYoutube, IconPhoto } from '@tabler/icons-react'
+import { IconBellRinging, IconBook, IconBrandYoutube, IconPhoto } from '@tabler/icons-react'
 
 interface NewsPageProps {
   params: Promise<{
@@ -102,6 +102,12 @@ export default async function NewsPage({ params }: NewsPageProps) {
                   <>
                     <IconBellRinging className="text-slate-700 size-5" />
                     <span>اخبار و تازه ها</span>
+                  </>
+                )}
+                {news.type === 'learning' && (
+                  <>
+                    <IconBook className="text-slate-700 size-5" />
+                    <span>مطالب آموزشی</span>
                   </>
                 )}
               </span>

@@ -75,6 +75,7 @@ export interface Config {
     news: News;
     tags: Tag;
     shahid: Shahid;
+    'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -88,6 +89,7 @@ export interface Config {
     news: NewsSelect<false> | NewsSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
     shahid: ShahidSelect<false> | ShahidSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -306,8 +308,45 @@ export interface Shahid {
    * آیا این شهید در سایت نمایش داده شود؟
    */
   isActive?: boolean | null;
+  excerpt?: string | null;
+  /**
+   * آدرس صفحه - به صورت خودکار از نام تولید می‌شود
+   */
+  slug: string;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv".
+ */
+export interface PayloadKv {
+  id: string;
+  key: string;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -343,6 +382,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'shahid';
         value: string | Shahid;
+      } | null)
+    | ({
+        relationTo: 'payload-kv';
+        value: string | PayloadKv;
       } | null);
   globalSlug?: string | null;
   user:
@@ -511,8 +554,19 @@ export interface ShahidSelect<T extends boolean = true> {
   fullName?: T;
   image?: T;
   isActive?: T;
+  excerpt?: T;
+  slug?: T;
+  body?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv_select".
+ */
+export interface PayloadKvSelect<T extends boolean = true> {
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
