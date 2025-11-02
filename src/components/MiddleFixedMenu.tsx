@@ -1,11 +1,16 @@
+// components/MiddleFixedMenu.tsx
 'use client'
-import { usePathname } from 'next/navigation' // ✅ فقط usePathname
+import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import SecureIcon from './SecureIcon'
 import Link from 'next/link'
-import { IconBell, IconBrandYoutube, IconFlag } from '@tabler/icons-react'
+import { IconBell, IconBrandYoutube, IconFlag, IconSearch } from '@tabler/icons-react'
+import SearchModal from './SearchModal'
 
 export default function MiddleFixedMenu() {
-  const pathname = usePathname() // ✅ این باید string برگرداند
+  const pathname = usePathname()
+  const [searchOpen, setSearchOpen] = useState(false)
+
   const isHome = pathname === '/' || pathname === '/frontend/'
   const isAbout = pathname === '/pages/about-us'
 
@@ -23,6 +28,7 @@ export default function MiddleFixedMenu() {
           <SecureIcon />
           <div className="text-xs">خانه</div>
         </Link>
+
         <Link
           href="/pages/about-us"
           className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
@@ -50,6 +56,7 @@ export default function MiddleFixedMenu() {
           </svg>
           <div className="text-xs">دربــاره ما</div>
         </Link>
+
         <Link
           href="/news"
           className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
@@ -61,6 +68,7 @@ export default function MiddleFixedMenu() {
           <IconBell />
           <div className="text-xs">اخبــار و تــازه ها</div>
         </Link>
+
         <Link
           href="/learning"
           className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
@@ -72,6 +80,7 @@ export default function MiddleFixedMenu() {
           <IconBrandYoutube />
           <div className="text-xs">مطالب آموزشی</div>
         </Link>
+
         <Link
           href="/shahid"
           className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
@@ -83,7 +92,18 @@ export default function MiddleFixedMenu() {
           <IconFlag />
           <div className="text-xs">معـرفی شهیـدان</div>
         </Link>
+
+        <button
+          onClick={() => setSearchOpen(true)}
+          className="flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md text-slate-500 hover:text-brand hover:bg-brand-light"
+        >
+          <IconSearch />
+          <div className="text-xs">جستــجو</div>
+        </button>
       </div>
+
+      {/* Modal جستجو */}
+      <SearchModal open={searchOpen} onOpenChange={setSearchOpen} />
     </div>
   )
 }
