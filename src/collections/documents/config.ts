@@ -16,7 +16,7 @@ const Documents: CollectionConfig = {
   slug: 'documents',
   labels: {
     singular: 'سند',
-    plural: 'اسناد',
+    plural: 'قوانین و مقررات',
   },
   admin: {
     useAsTitle: 'title',

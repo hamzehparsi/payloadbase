@@ -94,13 +94,15 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
               </div>
               <div className="w-1/5">
                 <LastShahidItem />
-                <Image
-                  src="/doc.svg"
-                  alt="سند"
-                  width={200}
-                  height={200}
-                  className="mt-10 w-full h-auto"
-                />
+                <Link href={'/documents'}>
+                  <Image
+                    src="/doc.svg"
+                    alt="سند"
+                    width={200}
+                    height={200}
+                    className="mt-10 w-full h-auto"
+                  />
+                </Link>
               </div>
             </div>
           </div>

@@ -37,14 +37,14 @@ export default async function DocumentsPage() {
   const documents = await getDocuments()
 
   return (
-    <div className="py-8">
-      <h1 className="text-3xl font-bold mb-8">اسناد</h1>
+    <div className="p-2">
+      <h1 className="text-2xl font-black tracking-tighter mb-8">قوانین و مقررات</h1>
 
       {documents.length === 0 ? (
         <p className="text-gray-500 text-center py-12">هیچ سندی یافت نشد</p>
       ) : (
         <div className="">
-          <ul className="divide-y divide-gray-200">
+          <ul className="">
             {documents.map((doc) => (
               <li key={doc.id}>
                 <Link
@@ -52,7 +52,7 @@ export default async function DocumentsPage() {
                   className="block hover:bg-gray-50 rounded-xl transition-colors p-6"
                 >
                   <div className="flex justify-between items-start">
-                    <h2 className="text-lg tracking-tighter font-semibold text-gray-900 mb-2">
+                    <h2 className="text-[16px] tracking-tighter font-semibold text-gray-900 mb-2">
                       {doc.title}
                     </h2>
                     <span className="text-sm text-gray-500 mr-4 whitespace-nowrap">
