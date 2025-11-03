@@ -19,6 +19,7 @@ import { Shahid } from './collections/shahid/config'
 import { WeeklyHadith } from './globals/WeeklyHadith'
 import { LinksFooter } from './globals/LinksFooter'
 import { LinksContents } from './globals/LinksContents'
+import Documents from './collections/documents/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -30,7 +31,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Managers, Pages, News, Tags, Shahid],
+  collections: [Users, Media, Managers, Pages, News, Tags, Shahid, Documents],
   editor: lexicalEditor(),
   globals: [WeeklyHadith, LinksFooter, LinksContents],
   localization: {

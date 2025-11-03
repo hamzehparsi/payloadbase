@@ -30,7 +30,7 @@ export default function LoginForm(): ReactElement {
       if (result.success && result.user) {
         // state رو بدون refresh آپدیت میکنه
         setUser(result.user)
-        router.push('/dashboard')
+        router.push('/documents')
       } else {
         setError(result.error || 'خطایی رخ داده است')
       }

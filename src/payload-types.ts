@@ -75,6 +75,7 @@ export interface Config {
     news: News;
     tags: Tag;
     shahid: Shahid;
+    documents: Document;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -89,6 +90,7 @@ export interface Config {
     news: NewsSelect<false> | NewsSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
     shahid: ShahidSelect<false> | ShahidSelect<true>;
+    documents: DocumentsSelect<false> | DocumentsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -204,6 +206,8 @@ export interface Media {
  */
 export interface Manager {
   id: string;
+  fullname: string;
+  post?: string | null;
   status?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -333,6 +337,24 @@ export interface Shahid {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents".
+ */
+export interface Document {
+  id: string;
+  title: string;
+  /**
+   * آدرس صفحه - به صورت خودکار از عنوان تولید می‌شود
+   */
+  slug: string;
+  /**
+   * فایل‌های مرتبط با این سند
+   */
+  files?: (string | Media)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -382,6 +404,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'shahid';
         value: string | Shahid;
+      } | null)
+    | ({
+        relationTo: 'documents';
+        value: string | Document;
       } | null)
     | ({
         relationTo: 'payload-kv';
@@ -485,6 +511,8 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "managers_select".
  */
 export interface ManagersSelect<T extends boolean = true> {
+  fullname?: T;
+  post?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -557,6 +585,17 @@ export interface ShahidSelect<T extends boolean = true> {
   excerpt?: T;
   slug?: T;
   body?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents_select".
+ */
+export interface DocumentsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  files?: T;
   updatedAt?: T;
   createdAt?: T;
 }

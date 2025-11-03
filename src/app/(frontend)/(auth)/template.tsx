@@ -1,3 +1,4 @@
+// \src\app\(frontend)\(auth)\template.tsx
 import { redirect } from 'next/navigation'
 import React, { ReactNode } from 'react'
 import { getUser } from './actions/getUser'

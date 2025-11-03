@@ -4,7 +4,13 @@ import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import SecureIcon from './SecureIcon'
 import Link from 'next/link'
-import { IconBell, IconBrandYoutube, IconFlag, IconSearch } from '@tabler/icons-react'
+import {
+  IconBell,
+  IconBrandYoutube,
+  IconFileTypeDoc,
+  IconFlag,
+  IconSearch,
+} from '@tabler/icons-react'
 import SearchModal from './SearchModal'
 
 export default function MiddleFixedMenu() {
@@ -79,6 +85,17 @@ export default function MiddleFixedMenu() {
         >
           <IconBrandYoutube />
           <div className="text-xs">مطالب آموزشی</div>
+        </Link>
+        <Link
+          href="/documents"
+          className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
+            pathname === '/documents'
+              ? 'bg-brand-light text-brand font-bold'
+              : 'text-slate-500 hover:text-brand hover:bg-brand-light'
+          }`}
+        >
+          <IconFileTypeDoc />
+          <div className="text-xs">قوانین و مقررات</div>
         </Link>
 
         <Link

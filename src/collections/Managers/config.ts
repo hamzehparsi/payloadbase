@@ -42,6 +42,20 @@ export const Managers: CollectionConfig = {
       index: true, // برای سرعت بیشتر
     },
     {
+      name: 'fullname',
+      label: 'نام و نام خانوادگی',
+      type: 'text',
+      required: true,
+      unique: true, // مهم: باید unique باشه
+      index: true, // برای سرعت بیشتر
+    },
+    {
+      name: 'post',
+      label: 'سمت',
+      type: 'text',
+      index: true, // برای سرعت بیشتر
+    },
+    {
       name: 'status',
       type: 'checkbox',
       label: 'فعال',
