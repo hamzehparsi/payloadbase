@@ -12,6 +12,7 @@ import FooterMenuFixed from '@/components/FooterMenuFixed'
 import Footer from '@/components/Footer'
 import LastShahidItem from '@/components/LastShahidItem'
 import WeeklyHadith from '@/components/WeeklyHadith'
+import OccasionBanner from '@/components/OccasionBanner'
 
 const dana = localFont({
   src: [
@@ -90,7 +91,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             <div className="flex mr-[235px] gap-4">
               <div className="w-4/5">
                 <WeeklyHadith />
-                <div className="">{children}</div>
+                <div className="">
+                  {children}
+                  <OccasionBanner />
+                </div>
               </div>
               <div className="w-1/5">
                 <LastShahidItem />

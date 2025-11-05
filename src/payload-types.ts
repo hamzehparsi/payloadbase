@@ -76,6 +76,7 @@ export interface Config {
     tags: Tag;
     shahid: Shahid;
     documents: Document;
+    'occasion-banners': OccasionBanner;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -91,6 +92,7 @@ export interface Config {
     tags: TagsSelect<false> | TagsSelect<true>;
     shahid: ShahidSelect<false> | ShahidSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
+    'occasion-banners': OccasionBannersSelect<false> | OccasionBannersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -242,6 +244,7 @@ export interface Page {
   excerpt?: string | null;
   image?: (string | null) | Media;
   status?: boolean | null;
+  offices?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -355,6 +358,43 @@ export interface Document {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "occasion-banners".
+ */
+export interface OccasionBanner {
+  id: string;
+  /**
+   * عنوان بنر مناسبتی (مثال: نوروز 1404، عید فطر)
+   */
+  title: string;
+  /**
+   * تصویر بنر مناسبتی (سایز توصیه شده: 1920x400 پیکسل)
+   */
+  image: string | Media;
+  /**
+   * تاریخی که بنر باید شروع به نمایش شود
+   */
+  startDate: string;
+  /**
+   * تاریخی که بنر باید از نمایش خارج شود
+   */
+  endDate: string;
+  /**
+   * وضعیت دستی بنر (حتی اگر در بازه زمانی باشد)
+   */
+  isActive?: boolean | null;
+  /**
+   * لینک مقصد هنگام کلیک روی بنر
+   */
+  link?: string | null;
+  /**
+   * اولویت نمایش (عدد کمتر = اولویت بیشتر)
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -408,6 +448,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'documents';
         value: string | Document;
+      } | null)
+    | ({
+        relationTo: 'occasion-banners';
+        value: string | OccasionBanner;
       } | null)
     | ({
         relationTo: 'payload-kv';
@@ -542,6 +586,7 @@ export interface PagesSelect<T extends boolean = true> {
   excerpt?: T;
   image?: T;
   status?: T;
+  offices?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -596,6 +641,21 @@ export interface DocumentsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   files?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "occasion-banners_select".
+ */
+export interface OccasionBannersSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  startDate?: T;
+  endDate?: T;
+  isActive?: T;
+  link?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }

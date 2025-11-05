@@ -100,9 +100,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       )}
 
       {/* اطلاعات اضافی */}
-      <div className="mt-12 pt-8 border-t text-sm text-gray-500">
+      {/* <div className="mt-12 pt-8 border-t text-sm text-gray-500">
         <p>آخرین بروزرسانی: {new Date(page.updatedAt).toLocaleDateString('fa-IR')}</p>
-      </div>
+      </div> */}
     </div>
   )
 }

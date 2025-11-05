@@ -165,7 +165,7 @@ export const News: CollectionConfig = {
         mimeType: { contains: 'image' },
       },
       admin: {
-        condition: (data) => data.type === 'photo-report',
+        // condition: (data) => data.type === 'photo-report',
         description: 'تصاویر گزارش تصویری را انتخاب کنید (می‌توانید چندین عکس انتخاب کنید)',
       },
     },
@@ -179,7 +179,7 @@ export const News: CollectionConfig = {
         mimeType: { contains: 'video' },
       },
       admin: {
-        condition: (data) => data.type === 'video',
+        // condition: (data) => data.type === 'video',
         description: 'یا می‌توانید فایل ویدیو را مستقیماً آپلود کنید',
       },
     },

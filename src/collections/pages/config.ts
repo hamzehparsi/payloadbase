@@ -63,5 +63,11 @@ export const Pages: CollectionConfig = {
       label: 'منتشر شده',
       defaultValue: true,
     },
+    {
+      name: 'offices',
+      type: 'checkbox',
+      label: 'معرفی ادارات',
+      defaultValue: false,
+    },
   ],
 }

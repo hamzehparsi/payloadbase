@@ -10,6 +10,7 @@ import {
   IconFileTypeDoc,
   IconFlag,
   IconSearch,
+  IconSitemap,
 } from '@tabler/icons-react'
 import SearchModal from './SearchModal'
 
@@ -62,7 +63,17 @@ export default function MiddleFixedMenu() {
           </svg>
           <div className="text-xs">دربــاره ما</div>
         </Link>
-
+        <Link
+          href="/offices"
+          className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
+            pathname === '/offices'
+              ? 'bg-brand-light text-brand font-bold'
+              : 'text-slate-500 hover:text-brand hover:bg-brand-light'
+          }`}
+        >
+          <IconSitemap />
+          <div className="text-xs">معرفی زیر مجموعه ها</div>
+        </Link>
         <Link
           href="/news"
           className={`flex cursor-pointer items-center gap-2 transition-all ease-in-out duration-300 text-sm px-4 py-2 rounded-md ${
