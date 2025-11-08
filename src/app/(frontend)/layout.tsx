@@ -61,7 +61,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const user = await getUser()
 
   return (
-    <html lang="fa" dir="rtl" className={dana.variable}>
+    <html lang="fa" dir="rtl" className={dana.variable} suppressHydrationWarning>
       <body className={dana.className}>
         <UserProvider initialUser={user}>
           <div className="mx-auto max-w-screen-xl pt-10">

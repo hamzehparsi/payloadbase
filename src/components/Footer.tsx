@@ -3,7 +3,7 @@ import LinksContents from './LinksContents'
 
 export default function Footer() {
   return (
-    <div className="flex items-start m-10 gap-10 justify-between">
+    <div className="flex items-start pb-10 gap-10 justify-between">
       <div className="w-3/5">
         <div className="flex items-center gap-3">
           <div className="size-2 bg-brand-dark rounded-full"></div>

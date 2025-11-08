@@ -76,5 +76,9 @@ export default async function OccasionBanner() {
 
   if (!banner) return null
 
-  return <OccasionBannerClient banner={banner} />
+  return (
+    <div id="BNER">
+      <OccasionBannerClient banner={banner} />
+    </div>
+  )
 }
