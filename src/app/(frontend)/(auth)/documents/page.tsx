@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import type { Payload } from 'payload'
+import { Metadata } from 'next'
 
 // تایپ برای Document
 type Document = {
@@ -33,6 +34,10 @@ function formatDate(date: string) {
   })
 }
 
+export const metadata: Metadata = {
+  title: 'اداره حراست | قوانین و مقررات',
+  description: 'قوانین و مقررات',
+}
 export default async function DocumentsPage() {
   const documents = await getDocuments()
 

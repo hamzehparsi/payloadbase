@@ -12,7 +12,12 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination'
 import { IconBellRinging, IconBrandYoutube, IconPhoto } from '@tabler/icons-react'
+import type { Metadata } from 'next'
 
+export const metadata: Metadata = {
+  title: 'اداره حراست | اخبار و تازه ها',
+  description: 'اخبار و تازه ها',
+}
 interface NewsItem {
   id: string
   title: string

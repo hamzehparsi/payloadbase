@@ -12,7 +12,12 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination'
 import { IconBook } from '@tabler/icons-react'
+import type { Metadata } from 'next'
 
+export const metadata: Metadata = {
+  title: 'اداره حراست | مطالب آموزشی',
+  description: 'مطالب آموزشی',
+}
 interface LearningItem {
   id: string
   title: string

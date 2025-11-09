@@ -9,6 +9,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
+import { Metadata } from 'next'
 
 interface ShahidItem {
   id: string
@@ -38,6 +39,10 @@ interface ShahidPageProps {
   }>
 }
 
+export const metadata: Metadata = {
+  title: 'اداره حراست | شهیدان',
+  description: 'شهیدان',
+}
 async function getShahidList(page: number = 1) {
   try {
     const res = await fetch(

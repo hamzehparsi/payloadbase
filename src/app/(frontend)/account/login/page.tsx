@@ -2,11 +2,16 @@ import React from 'react'
 import LoginForm from './components/loginForm'
 import { getUser } from '../../(auth)/actions/getUser'
 import { redirect } from 'next/navigation'
+import { Metadata } from 'next'
 
 interface SearchParams {
   [key: string]: string | undefined
 }
 
+export const metadata: Metadata = {
+  title: 'اداره حراست | ورود',
+  description: 'ورود',
+}
 export default async function LoginPage({
   searchParams,
 }: {

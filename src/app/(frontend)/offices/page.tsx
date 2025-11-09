@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import Link from 'next/link'
 import { IconArrowLeft } from '@tabler/icons-react'
+import { Metadata } from 'next'
 
 type Page = {
   id: string
@@ -39,13 +40,17 @@ function formatDate(date: string) {
   })
 }
 
+export const metadata: Metadata = {
+  title: 'اداره حراست | معرفی ادارات',
+  description: 'معرفی ادارات',
+}
 export default async function OfficesPage() {
   const pages = await getOfficePages()
 
   return (
     <div className="py-4">
       {/* هدر صفحه */}
-      <h1 className="text-2xl font-black text-gray-900 mb-2">معرفی ادارات</h1>
+      <h1 className="text-2xl font-black text-gray-900 mb-2">معرفی واحدها</h1>
       <div className="mb-4">{/* <p className="text-gray-600">{pages.length} اداره</p> */}</div>
 
       {/* لیست ادارات */}

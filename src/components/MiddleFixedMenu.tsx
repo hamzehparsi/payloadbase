@@ -58,7 +58,7 @@ export default function MiddleFixedMenu() {
           }`}
         >
           <IconSitemap />
-          <div className="text-xs">معرفی زیر مجموعه ها</div>
+          <div className="text-xs">معرفی واحد ها</div>
         </Link>
         <Link
           href="/news"

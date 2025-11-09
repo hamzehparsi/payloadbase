@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { IconArrowRight } from '@tabler/icons-react'
+import { Metadata, ResolvingMetadata } from 'next'
 // import { serializeLexical } from '@payloadcms/richtext-lexical/lexical/serialize'
 
 interface ShahidPageProps {
@@ -87,19 +88,22 @@ function lexicalToHTML(content: any): string {
   return html
 }
 
-export async function generateMetadata({ params }: ShahidPageProps) {
+export async function generateMetadata({ params }: ShahidPageProps): Promise<Metadata> {
   const { slug } = await params
   const shahid = await getShahid(slug)
 
+  const siteTitle = 'اداره حراست'
+
   if (!shahid) {
     return {
-      title: 'شهید یافت نشد',
+      title: `${siteTitle} | شهید یافت نشد`,
+      description: '',
     }
   }
 
   return {
-    title: `شهید ${shahid.fullName}`,
-    description: shahid.excerpt,
+    title: `${siteTitle} | شهید ${shahid.fullName}`,
+    description: shahid.excerpt || '',
   }
 }
 

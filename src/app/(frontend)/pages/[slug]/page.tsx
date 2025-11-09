@@ -33,6 +33,7 @@ interface PageResponse {
 // تولید metadata برای SEO
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
+  const siteTitle = 'اداره حراست'
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/pages?where[slug][equals]=${slug}&where[status][equals]=true`,
@@ -49,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!page) return {}
 
   return {
-    title: page.seo?.metaTitle || page.title,
+    title: `${siteTitle} | ${page.title}`,
     description: page.seo?.metaDescription || page.excerpt,
   }
 }

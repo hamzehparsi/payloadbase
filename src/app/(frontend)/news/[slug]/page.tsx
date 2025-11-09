@@ -1,6 +1,7 @@
 // src/app/(frontend)/news/[slug]/page.tsx
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import type { Metadata } from 'next'
 import { Card, CardContent } from '@/components/ui/card'
 import {
   Carousel,
@@ -16,7 +17,24 @@ interface NewsPageProps {
     slug: string
   }>
 }
+export async function generateMetadata({ params }: NewsPageProps): Promise<Metadata> {
+  const { slug } = await params
+  const news = await getNews(slug)
 
+  const siteTitle = 'اداره حراست'
+
+  if (!news) {
+    return {
+      title: `${siteTitle} | خبر یافت نشد`,
+      description: '',
+    }
+  }
+
+  return {
+    title: `${siteTitle} | ${news.title}`,
+    description: news.excerpt || '',
+  }
+}
 async function getNews(slug: string) {
   try {
     const res = await fetch(
@@ -35,22 +53,6 @@ async function getNews(slug: string) {
   } catch (error) {
     console.error('Error fetching news:', error)
     return null
-  }
-}
-
-export async function generateMetadata({ params }: NewsPageProps) {
-  const { slug } = await params
-  const news = await getNews(slug)
-
-  if (!news) {
-    return {
-      title: 'خبر یافت نشد',
-    }
-  }
-
-  return {
-    title: news.title,
-    description: news.excerpt,
   }
 }
 
