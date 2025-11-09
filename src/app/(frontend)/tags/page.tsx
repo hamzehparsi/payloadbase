@@ -1,7 +1,7 @@
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import Link from 'next/link'
-import { IconTag, IconTagFilled } from '@tabler/icons-react'
+import { IconChartPieFilled, IconEyeFilled, IconTag, IconTagFilled } from '@tabler/icons-react'
 import { toPersianNumber } from '@/utils/persianNumber'
 
 type Tag = {
@@ -131,41 +131,41 @@ export default async function AllTagsPage() {
 
       {/* آمار کلی */}
       <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-gradient-to-r from-brand to-brand-dark rounded-lg shadow-lg p-6 text-white">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-              <IconTag className="text-gray-700" />
+        <div className="border border-slate-200 group rounded-lg p-6 text-white">
+          <div className="flex items-center gap-4 group-hover:translate-y-[-5px] transition-all duration-300">
+            <div className="w-12 h-12 bg-brand rounded-full flex items-center justify-center">
+              <IconTag className="text-white" />
             </div>
             <div>
-              <p className="text-sm opacity-90">تعداد هشتگ‌ها</p>
-              <p className="text-3xl font-bold">{toPersianNumber(tags.length)}</p>
+              <p className="text-sm font-bold text-gray-900">تعداد هشتگ‌ها</p>
+              <p className="text-xs text-gray-500">{toPersianNumber(tags.length)} هشتگ</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-lg shadow-lg p-6 text-white">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-              <IconTag className="text-gray-700" />
+        <div className="border border-slate-200 group rounded-lg p-6 text-white">
+          <div className="flex items-center gap-4 group-hover:translate-y-[-5px] transition-all duration-300">
+            <div className="w-12 h-12 bg-brand rounded-full flex items-center justify-center">
+              <IconChartPieFilled className="text-white" />
             </div>
             <div>
-              <p className="text-sm opacity-90">کل مطالب</p>
-              <p className="text-3xl font-bold">
-                {toPersianNumber(sortedTags.reduce((sum, tag) => sum + tag.postCount, 0))}
+              <p className="text-sm font-bold text-gray-900">کل مطالب</p>
+              <p className="text-xs text-gray-500">
+                {toPersianNumber(sortedTags.reduce((sum, tag) => sum + tag.postCount, 0))} مطلب
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg shadow-lg p-6 text-white">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-              <IconTag className="text-gray-700" />
+        <div className="border border-slate-200 group rounded-lg p-6 text-white">
+          <div className="flex items-center gap-4 group-hover:translate-y-[-5px] transition-all duration-300">
+            <div className="w-12 h-12 bg-brand rounded-full flex items-center justify-center">
+              <IconEyeFilled className="text-white" />
             </div>
             <div>
-              <p className="text-sm opacity-90">محبوب‌ترین هشتگ</p>
-              <p className="text-xl font-bold truncate">
-                {toPersianNumber(sortedTags[0]?.name || '-')}
+              <p className="text-sm font-bold text-gray-900">محبوب‌ترین هشتگ</p>
+              <p className="text-xs text-gray-500">
+                {toPersianNumber(sortedTags[0]?.name || '-')} مطلب
               </p>
             </div>
           </div>
